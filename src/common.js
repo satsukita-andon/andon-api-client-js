@@ -1,5 +1,38 @@
 import fetch from 'whatwg-fetch'
 
+export class OrdInt {
+  /**
+   * @param {number} n
+   * @return {OrdInt}
+   */
+  constructor(n) {
+    this._num = n
+  }
+
+  /**
+   * @return {string}
+   */
+  toString() {
+    switch (this._num % 10) {
+      case 1:
+        return this._num + 'st';
+      case 2:
+        return this._num + 'nd';
+      case 3:
+        return this._num + 'rd';
+      default:
+        return this._num + 'th';
+    }
+  }
+
+  /**
+   * @return {number}
+   */
+  raw() {
+    return this._num
+  }
+}
+
 /**
  * Error class for andon-api
  */
@@ -15,26 +48,12 @@ export class AndonError extends Error {
   }
 }
 
-/**
- * @param {string} endpoint
- * @param {string} method
- * @param {string|Object} body
- * @param {string} [token]
- * @return {Promise<Object>}
- */
-export function call(endpoint, method, body, token) {
+function callCommon(endpoint, method, headers, body, token) {
   const url = 'https://api.satsukita-andon.com/dev' + endpoint
-  let headers = {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  }
   if (token) {
     headers['X-Andon-Authentication'] = token
   }
-  if (body && typeof body === 'object') {
-    body = JSON.stringify(body)
-  }
-  return fetch(url, {
+ fetch(url, {
     method: method,
     headers: headers,
     body: body
@@ -55,4 +74,35 @@ export function call(endpoint, method, body, token) {
       }
     }
   })
+}
+
+/**
+ * @param {string} endpoint
+ * @param {string} method
+ * @param {Object} json
+ * @param {string} [token]
+ * @return {Promise<Object>}
+ */
+export function call(endpoint, method, json, token) {
+  let headers = {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+  }
+  const body = JSON.stringify(json)
+  return callCommon(endpoint, method, headers, body, token)
+}
+
+/**
+ * @param {string} endpoint
+ * @param {string} method
+ * @param {FormData} form
+ * @param {string} [token]
+ * @return {Promise<Object>}
+ */
+export function callMultipart(endpoint, method, form, token) {
+  let headers = {
+    'Accept': 'application/json',
+    'Content-Type': 'multipart/form-data'
+  }
+  return callCommon(endpoint, method, headers, form, token)
 }

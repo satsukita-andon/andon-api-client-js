@@ -6,7 +6,7 @@ import { call } from './common'
  * @return {Promise<string>} - access token
  */
 export function signin(login, password) {
-  call('/auth/access_token', 'get', {
+  return call('/auth/access_token', 'get', {
     login: login,
     password: password
   }).then((json) => {
@@ -42,13 +42,18 @@ export function signup(login, name, password, times) {
  * @param {Object} param
  * @param {string} [param.login]
  * @param {string} [param.name]
+ * @param {File} [param.icon]
  * @param {string} [param.first_class_id]
  * @param {string} [param.second_class_id]
  * @param {string} [param.third_class_id]
  * @return {Promise<User>}
  */
 export function update(token, param) {
-  return call('/auth/me', 'patch', param, token)
+  let form = new FormData();
+  for (var key in param) {
+    form.append(key, param[key])
+  }
+  return callMultipart('/auth/me', 'patch', form, token)
 }
 
 /**

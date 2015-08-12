@@ -5,7 +5,7 @@ import { call } from './common'
  * @property {number} id
  * @property {string} title
  * @property {string} body
- * @property {Array<Tag>} tags
+ * @property {Array<ArticleTag>} tags
  * @property {User} owner
  * @property {string|Array<User>} collaborators - "all" or an array of user
  * @property {string} created_at - ISO8601 date

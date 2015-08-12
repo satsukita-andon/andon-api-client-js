@@ -19,7 +19,7 @@ export class AndonError extends Error {
  * @param {string} endpoint
  * @param {string} method
  * @param {string|Object} body
- * @param {?string} token
+ * @param {string} [token]
  * @return {Promise<Object>}
  */
 export function call(endpoint, method, body, token) {

@@ -8,6 +8,7 @@ import { call } from './common'
  * @property {Array<ArticleTag>} tags
  * @property {User} owner
  * @property {string|Array<User>} collaborators - "all" or an array of user
+ * @property {Array<Comment>} comments
  * @property {string} created_at - ISO8601 date
  * @property {?string} updated_at - ISO8601 date
  */

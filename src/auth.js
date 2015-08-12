@@ -19,7 +19,7 @@ export function signin(login, password) {
  * @return {Promise<User>}
  */
 export function get(token) {
-  call('/auth/me', 'get', null, token)
+  return call('/auth/me', 'get', null, token)
 }
 
 /**
@@ -30,7 +30,7 @@ export function get(token) {
  * @return {Promise<User>}
  */
 export function signup(login, name, password, times) {
-  call('/auth/me', 'post', {
+  return call('/auth/me', 'post', {
     login: login,
     password: password,
     times: times
@@ -48,7 +48,7 @@ export function signup(login, name, password, times) {
  * @return {Promise<User>}
  */
 export function update(token, param) {
-  call('/auth/me', 'patch', param, token)
+  return call('/auth/me', 'patch', param, token)
 }
 
 /**
@@ -57,7 +57,7 @@ export function update(token, param) {
  * @return {Promise<{}>}
  */
 export function password(token, password) {
-  call('/auth/password', 'patch', {
+  return call('/auth/password', 'patch', {
     password: password
   }, token)
 }
@@ -67,5 +67,5 @@ export function password(token, password) {
  * @return {Promise<{}>}
  */
 export function del(token) {
-  call('/auth/me', 'delete', null, token)
+  return call('/auth/me', 'delete', null, token)
 }

@@ -18,7 +18,7 @@ import { call } from './common'
  * @return {Array<Article>}
  */
 export function list(offset = 0, limit = 20) {
-  call('/articles', 'get', {
+  return call('/articles', 'get', {
     offset: offset,
     limit: limit
   })
@@ -29,7 +29,7 @@ export function list(offset = 0, limit = 20) {
  * @return {Promise<Article>}
  */
 export function get(id) {
-  call('/articles/' + id, 'get')
+  return call('/articles/' + id, 'get')
 }
 
 /**
@@ -41,7 +41,7 @@ export function get(id) {
  * @return {Promise<Article>}
  */
 export function create(token, title, body, tagIds = [], collaboratorIds = []) {
-  call('/articles', 'post', {
+  return call('/articles', 'post', {
     type: type,
     title: title,
     body: body,
@@ -61,7 +61,7 @@ export function create(token, title, body, tagIds = [], collaboratorIds = []) {
  * @return {Promise<Article>}
  */
 export function update(token, id, param) {
-  call('/articles/' + id, 'put', param, token)
+  return call('/articles/' + id, 'put', param, token)
 }
 
 /**
@@ -70,7 +70,7 @@ export function update(token, id, param) {
  * @return {Promise<{}>}
  */
 export function del(token, id) {
-  call('/articles/' + id, 'delete', null, token)
+  return call('/articles/' + id, 'delete', null, token)
 }
 
 /**
@@ -81,7 +81,7 @@ export function del(token, id) {
  * @return {Promise<Article>}
  */
 export function transfer(token, articleId, userId) {
-  call('/articles/' + articleId + '/transfer', 'put', {
+  return call('/articles/' + articleId + '/transfer', 'put', {
     id: userId
   }, token)
 }

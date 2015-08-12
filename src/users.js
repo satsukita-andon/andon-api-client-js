@@ -17,5 +17,5 @@ import { call } from './common'
  * @return {User}
  */
 export function get(id) {
-  call('/users/' + login, 'get')
+  return call('/users/' + login, 'get')
 }

@@ -9,7 +9,7 @@ gulp.task('build', function() {
     .pipe(sourcemaps.init())
     .pipe(babel())
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest('lib'));
 });
 
 gulp.task('html', ['build'], shell.task('esdoc -c esdoc.json'));

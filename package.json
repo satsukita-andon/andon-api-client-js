@@ -2,7 +2,7 @@
   "name": "andon-api",
   "version": "0.0.0",
   "description": "Promise based client library for the APIs of satsukita-andon.com",
-  "main": "dist/main.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -28,5 +28,6 @@
   },
   "dependencies": {
     "whatwg-fetch": "^0.9.0"
-  }
+  },
+  "files": ["lib"]
 }

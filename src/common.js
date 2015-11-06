@@ -1,4 +1,10 @@
-import fetch from 'whatwg-fetch'
+import 'whatwg-fetch'
+
+/**
+ * @typedef {string} SortType
+ */
+export const ASC = "ASC";
+export const DESC = "DESC";
 
 export class OrdInt {
   /**
@@ -53,7 +59,7 @@ function callCommon(endpoint, method, headers, body, token) {
   if (token) {
     headers['X-Andon-Authentication'] = token
   }
- fetch(url, {
+  fetch(url, {
     method: method,
     headers: headers,
     body: body
@@ -65,6 +71,8 @@ function callCommon(endpoint, method, headers, body, token) {
           message: 'unexpected client error'
         }
       }
+    } else if (res.status === 204) {
+      return {};
     } else {
       const json = res.json()
       if (json.error !== null) {
